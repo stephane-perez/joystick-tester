@@ -29,7 +29,7 @@ $(B)/JOYTSTEN.TOS: src/joytest.s | $(B) $(VASM)
 # Expected MD5 (README.md, README_FR.md); update them when the program changes on purpose
 check: all
 	@$(PY) -c "import hashlib,sys; \
-exp={'$(B)/JOYTEST.TOS':'409a6a20a58231d018e19241b7feac34','$(B)/JOYTSTEN.TOS':'324808fc4ba48e3561794939379ea1ce'}; \
+exp={'$(B)/JOYTEST.TOS':'db27ce125f4dc90f3078bd4d6b742221','$(B)/JOYTSTEN.TOS':'87ce3a687f6094a70bfb160fa0ab3e4b'}; \
 bad=[f for f,h in exp.items() if hashlib.md5(open(f,'rb').read()).hexdigest()!=h]; \
 print('OK' if not bad else 'MISMATCH: '+' '.join(bad)); sys.exit(1 if bad else 0)"
 

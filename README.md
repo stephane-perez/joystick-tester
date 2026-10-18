@@ -6,7 +6,7 @@ A small utility for the **Atari ST, STE, Mega STE and Falcon** that shows, in re
 
 - **ports 0 (mouse) and 1** of the ST: the 8 directions and the fire button;
 - **the parallel port**, for 4-player adapters (Gauntlet II, Leatherneck…): the directions read on D0–D3 and on D4–D7, the fire button on BUSY and on STROBE, and the 8 raw data lines. This shows how any adapter is wired;
-- **the enhanced joystick ports A and B** (STE and Falcon only): Jaguar pad directions and the A, B, C, Pause (P) and Option (O) buttons, plus the raw values read on each of the 4 select lines, three different ways (a hardware diagnostic, see below).
+- **the enhanced joystick ports A and B** (STE and Falcon only): Jaguar pad directions and the A, B, C, Pause (P) and Option (O) buttons.
 
 Press any key to quit: the original joystick handler, the mouse and the sound chip registers are restored. It works in low, medium and high resolution.
 
@@ -27,7 +27,7 @@ Every push builds both programs: they can be downloaded from the **Actions** tab
 | Parallel port | Data lines D0–D7 (sound chip register 15, port B set as input), BUSY (MFP GPIP bit 0), STROBE (sound chip register 14 bit 5, set back to 1 before each read). All lines are active low. |
 | Enhanced ports | Only when the `_MCH` cookie says STE (`$00010000`) or Falcon (`$00030000`): reading `$FF9202` on an STF or a Mega STE can cause a bus error. Select line written to `$FF9202`, buttons read in `$FF9200`, directions in `$FF9202`. |
 
-The raw table at the bottom shows, for each select line L0–L3 (both ports selected together), `$FF9202` and `$FF9200` read (1) just after the select, (2) after a short wait, (3) after a read of `$FF9202`. On a real STE, a read of `$FF9202` hides the buttons in the next read of `$FF9200` (column 3 stays `FFFF`); the Hatari emulator does not do this. Programs reading a Jaguar pad must read `$FF9200` first.
+On a real STE, a read of `$FF9202` hides the buttons in the next read of `$FF9200` (it reads `FFFF`); the Hatari emulator does not do this. JOYTEST, like any program reading a Jaguar pad, reads `$FF9200` right after the select, before any read of `$FF9202`.
 
 ## Building
 
@@ -42,8 +42,8 @@ On the first run, `make` builds the [vasm](http://sun.hasenbraten.de/vasm/) asse
 
 | File | MD5 |
 |---|---|
-| `JOYTEST.TOS` | `409a6a20a58231d018e19241b7feac34` |
-| `JOYTSTEN.TOS` | `324808fc4ba48e3561794939379ea1ce` |
+| `JOYTEST.TOS` | `db27ce125f4dc90f3078bd4d6b742221` |
+| `JOYTSTEN.TOS` | `87ce3a687f6094a70bfb160fa0ab3e4b` |
 
 ## Testing in Hatari
 

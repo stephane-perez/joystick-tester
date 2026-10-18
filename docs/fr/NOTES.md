@@ -38,11 +38,13 @@ construits par IK+ Reforged v1.1.0.
   C, Option en bit 1. Tout est actif à 0.
 - **Sur la machine réelle, une lecture de `$FF9202` masque les boutons dans
   la lecture suivante de `$FF9200`** (relu `FFFF`) ; une nouvelle sélection
-  remet tout en ordre. Hatari ne reproduit pas ce comportement. D'où les
-  trois colonnes du tableau brut : (1) juste après la sélection, (2) après
-  ~64 cycles d'attente, (3) après une lecture de `$FF9202`. Sur STE réel,
-  (1) et (2) montrent les cinq boutons, (3) reste à `FFFF`.
-- La ligne « Port étendu » utilise la lecture (1).
+  remet tout en ordre. Hatari ne reproduit pas ce comportement. Constaté
+  avec trois lectures par ligne (version 4 ci-dessous) : (1) juste après la
+  sélection, (2) après ~64 cycles d'attente, (3) après une lecture de
+  `$FF9202`. Sur STE réel, (1) et (2) montrent les cinq boutons, (3) reste à
+  `FFFF`.
+- JOYTEST lit donc `$FF9200` juste après chaque sélection, puis resélectionne
+  la ligne 0 pour lire les directions dans `$FF9202`.
 
 ## Historique (IK+ Reforged)
 
@@ -54,3 +56,9 @@ construits par IK+ Reforged v1.1.0.
    montrait des boutons muets (A, Option).
 4. Trois lectures de `$FF9200` par ligne : découverte du masquage par la
    lecture de `$FF9202`, sur STE réel.
+
+## Après IK+ Reforged
+
+5. Le tableau brut des ports étendus (4 lignes × `$FF9202` et 3 lectures de
+   `$FF9200`) est retiré : le diagnostic est fait, la ligne de chaque port
+   suffit. Seule la lecture (1) est gardée.
