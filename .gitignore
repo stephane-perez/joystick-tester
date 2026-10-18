@@ -1,0 +1,23 @@
+# Build output and local tools
+build/
+.tools/
+
+# Atari programs, disk images and TOS ROMs are never committed
+*.TOS
+*.tos
+*.PRG
+*.prg
+*.ST
+*.st
+*.MSA
+*.msa
+*.img
+*.IMG
+*.rom
+*.ROM
+*.zip
+*.ZIP
+
+# Hatari runs
+hatari/out/
+*.png
